@@ -1,6 +1,6 @@
-@import "/css/component/StopWatch.css";
-@import "/css/component/MemoryGame.css";
-@import "/css/component/Ranking.css";
+@import "component/StopWatch.css";
+@import "component/MemoryGame.css";
+@import "component/Ranking.css";
 
 @import url('https://fonts.googleapis.com/css2?family=Boogaloo&display=swap');
 
