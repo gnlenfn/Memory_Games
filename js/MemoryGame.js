@@ -72,6 +72,7 @@ function gameEnd() {
     // disabling start button
     document.querySelector(".watch-button").disabled = true;
     newRecord();
+    flippedCount = 0;
 }
 
 function flipBoard() {
