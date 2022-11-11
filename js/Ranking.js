@@ -21,7 +21,7 @@ function addList(record) {
 }
 
 function showRankings() {
-    const root = document.querySelector("#ranking-list")
+    const root = document.querySelector(".ranking-list")
     while (root.firstChild) {
         root.removeChild(root.firstChild);
     }
