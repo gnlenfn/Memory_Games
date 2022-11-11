@@ -58,11 +58,11 @@ function resetBoard() {
 
 }
 
-(function shuffle() {
+function shuffle() {
     cards.forEach((card) => {
         card.style.order = Math.floor(Math.random() * 12);
     });
-})();
+}
 
 function gameEnd() {
     stopTimer();
@@ -80,3 +80,7 @@ function flipBoard() {
     document.querySelectorAll(".memory-card").forEach((element) =>
         element.classList.remove("flip"));
 }
+
+
+// js executed
+// shuffle()

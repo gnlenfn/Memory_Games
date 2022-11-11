@@ -63,12 +63,13 @@ function revealButton() {
 
 
 // button eventListener
-document.querySelector('.watch-button').addEventListener("click", startTimer);
-document.querySelector('.watch-button').addEventListener("click",
+document.querySelector('.start-button').addEventListener("click", startTimer);
+document.querySelector('.start-button').addEventListener("click",
     function () {
         cards.forEach((card) => card.addEventListener("click", flipCard));
     });
-document.querySelector('.watch-button').addEventListener("click", hideButton);
+document.querySelector('.start-button').addEventListener("click", hideButton);
+document.querySelector(".start-button").addEventListener("click", shuffle);
 
 
 document.querySelector(".reset-button").addEventListener("click", resetTimer);
