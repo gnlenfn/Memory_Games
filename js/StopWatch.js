@@ -35,8 +35,9 @@ function resetTimer() {
     document.getElementById("micro").innerText = "00";
     document.getElementById("sec").innerText = "00";
 
-    location.reload();
-
+    // location.reload();
+    flipBoard();
+    stopTimer();
 }
 
 function stopTimer() {
@@ -50,18 +51,29 @@ function stopTimer() {
     }
 }
 
+function hideButton() {
+    const btn = document.querySelector(".start-button");
+    btn.style.visibility = "hidden";
+}
+
+function revealButton() {
+    const btn = document.querySelector(".start-button");
+    btn.style.visibility = "visible";
+}
+
 
 // button eventListener
-document.querySelector('.start-button').addEventListener("click", startTimer);
-document.querySelector('.start-button').addEventListener("click",
+document.querySelector('.watch-button').addEventListener("click", startTimer);
+document.querySelector('.watch-button').addEventListener("click",
     function () {
         cards.forEach((card) => card.addEventListener("click", flipCard));
     });
+document.querySelector('.watch-button').addEventListener("click", hideButton);
 
-
-// document.querySelector(".stop-button").addEventListener("click", stopTimer);
 
 document.querySelector(".reset-button").addEventListener("click", resetTimer);
+document.querySelector(".reset-button").addEventListener("click", revealButton);
+
 
 
 

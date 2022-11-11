@@ -9,41 +9,35 @@ p {
     font-size: 50px;
 }
 
-button {
-    background-color: whitesmoke;
-    color: rgb(17, 5, 5);
-    font-family: 'Boogaloo', cursive;
-
-}
-
 span {
     font-size: 100px;
 }
 
-/*#micro {*/
-/*    font-size: 40px;*/
-/*}*/
-
 .watch-button {
     position: relative;
     border: none;
-    display: inline-block;
+    margin: auto;
+    display: block;
+    width: 100px;
     padding: 10px 20px;
     border-radius: 15px;
-    font-family: "paybooc-Light", sans-serif;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    font-family: "Boogaloo", cursive;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
     text-decoration: none;
     font-weight: 600;
     font-size: 25px;
-    transition: 0.25s;
+    background-color: floralwhite;
+    z-index: 5;
 }
 
-.watch-button {
-    background-color: floralwhite;
-    color: #1e6b7b;
-}
 
 .start-button {
     background-color: yellowgreen;
-    color: white;
+}
+
+.overlapped {
+    position: relative;
+    top: -50px;
+
+    z-index: 1;
 }
