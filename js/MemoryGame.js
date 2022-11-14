@@ -4,7 +4,7 @@ let hasFlippedCard = false;
 let lockBoard = false;
 let firstCard, secondCard;
 let flippedCount = 0;
-let level = 1;
+let level = 2;
 let cardsCount = Math.pow(2 * level, 2);
 const badges = ["angular", "aurelia", "aws", "backbone", "elasticsearch", "ember", "fastapi", "go", "hadoop",
                 "intellij", "kubernetes", "mongodb", "mysql", "react", "redis", "spring", "vscode", "vue"];
@@ -39,6 +39,7 @@ function initBoard() {
             (card) => card.remove()
         );
     }
+    shuffle(badges)
     addCardsOnBoard();
 
     let cardList = document.querySelectorAll(".memory-card");
@@ -120,8 +121,3 @@ function flipBoard() {
     document.querySelectorAll(".memory-card").forEach((element) =>
         element.classList.remove("flip"));
 }
-
-
-// js executed
-initBoard();
-const cards = document.querySelectorAll(".memory-card");

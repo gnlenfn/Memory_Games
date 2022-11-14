@@ -66,12 +66,12 @@ function addListenerToButton() {
     document.querySelector('.start-button').addEventListener("click", startTimer);
     document.querySelector('.start-button').addEventListener("click",
         function () {
-            cards.forEach((card) => card.addEventListener("click", flipCard));
+            document.querySelectorAll(".memory-card").forEach((card) => card.addEventListener("click", flipCard));
         });
     document.querySelector('.start-button').addEventListener("click", hideButton);
     document.querySelector(".start-button").addEventListener("click",
         function () {
-            cards.forEach((card) => {
+            document.querySelectorAll(".memory-card").forEach((card) => {
                 card.style.order = `${Math.floor(Math.random() * cardsCount)}`;
             });
         });
@@ -82,7 +82,7 @@ function addListenerToButton() {
 }
 
 
-addListenerToButton()
+// addListenerToButton()
 
 
 
