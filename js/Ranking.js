@@ -1,14 +1,10 @@
 const ranks = document.querySelector("#ranking-list");
-const RANK_KEY = "ranks";
-
-let ranking = localStorage.getItem(RANK_KEY);
-let parsed = ranking ? JSON.parse(ranking) : [];
+const RANK_KEY = `Lv${level}`;
 
 
-function saveRecord() {
+function saveRecord(parsed) {
     parsed.sort();
     localStorage.setItem(RANK_KEY, JSON.stringify(parsed));
-
 }
 
 function addList(record) {
@@ -34,6 +30,8 @@ function showRankings() {
 }
 
 function newRecord() {
+    let ranking = localStorage.getItem(RANK_KEY);
+    let parsed;
 
     const record = `${document.querySelector("#sec").innerText}:` +
                    `${document.querySelector("#micro").innerText}`;
@@ -45,7 +43,7 @@ function newRecord() {
     }
     parsed.push(record);
 
-    saveRecord();
+    saveRecord(parsed);
     showRankings();
 }
 
