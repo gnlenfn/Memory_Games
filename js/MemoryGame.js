@@ -1,11 +1,53 @@
-const cards = document.querySelectorAll(".memory-card");
+
 
 let hasFlippedCard = false;
 let lockBoard = false;
 let firstCard, secondCard;
 let flippedCount = 0;
-const cardsCount = 12;
+let level = 1;
+let cardsCount = Math.pow(2 * level, 2);
+const badges = ["angular", "aurelia", "aws", "backbone", "elasticsearch", "ember", "fastapi", "go", "hadoop",
+                "intellij", "kubernetes", "mongodb", "mysql", "react", "redis", "spring", "vscode", "vue"];
 
+function addCardsOnBoard() {
+    let board = document.querySelector(".memory-game");
+    badges.slice(0, cardsCount / 2).forEach((name) => {
+        for(let i = 0; i < 2; i++){
+            let badge = document.createElement("div");
+            badge.classList.add("memory-card")
+            badge.dataset.framework = name;
+
+            let front = document.createElement("img");
+            front.classList.add("front-face");
+            front.src = "img/" + name + ".svg";
+
+            let back = document.createElement("img");
+            back.classList.add("back-face");
+            back.src = "img/js-badge.svg";
+
+            badge.appendChild(front);
+            badge.appendChild(back);
+
+            board.appendChild(badge);
+        }
+    })
+}
+
+function initBoard() {
+    if(document.querySelectorAll(".memory-card")) {
+        document.querySelectorAll(".memory-card").forEach(
+            (card) => card.remove()
+        );
+    }
+    addCardsOnBoard();
+
+    let cardList = document.querySelectorAll(".memory-card");
+    cardList.forEach((card) => {
+        card.style.width = `calc(${100 / (2 * level )}% - 10px)`;
+        card.style.height = `calc(${100 / (2 * level )}$ - 10px)`;
+
+    })
+}
 
 function flipCard() {
     if (lockBoard) return;
@@ -58,10 +100,8 @@ function resetBoard() {
 
 }
 
-function shuffle() {
-    cards.forEach((card) => {
-        card.style.order = Math.floor(Math.random() * 12);
-    });
+function shuffle(arr) {
+    arr.sort(() => Math.random() -0.5);
 }
 
 function gameEnd() {
@@ -83,4 +123,5 @@ function flipBoard() {
 
 
 // js executed
-// shuffle()
+initBoard();
+const cards = document.querySelectorAll(".memory-card");
