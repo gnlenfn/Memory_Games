@@ -2,14 +2,12 @@
     align-items: center;
     text-align: center;
     font-family: "Boogaloo", cursive;
-    position: absolute;
-    right: 10%;
     padding: 60px;
+    margin: 0 0;
 }
 
 .ranking-class span {
     font-size: 25px;
-    width: 600px;
 }
 
 .ranking-class h1 {

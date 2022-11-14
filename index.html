@@ -1,22 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-us">
 <head>
-    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
     <title>Memory Game</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-    <div class="stop-watch">
-        <h1 id="record">
-            <span id="sec">00</span>:
-            <span id="micro">00</span>
-        </h1>
-        <div class="start-button watch-button">start</div>
-        <div class="reset-button watch-button overlapped">reset</div>
-    </div>
+    <div class="container">
 
-    <div class="game-section">
+        <div class="stop-watch">
+            <h1 id="record">
+                <span id="sec">00</span>:
+                <span id="micro">00</span>
+            </h1>
+            <div class="start-button watch-button">start</div>
+            <div class="reset-button watch-button overlapped">reset</div>
+        </div>
+
+
+        <div class="dummy"></div>
         <div class="memory-game">
             <div class="memory-card" data-framework="react">
                 <img class="front-face" src="img/react.svg" alt="React" />
