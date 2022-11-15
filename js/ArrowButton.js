@@ -1,6 +1,6 @@
 function nextLevel(){
     if(level === 3) {
-        alert("It is the hardest Level!");
+        setTimeout(() => alert("It is the hardest Level!"), 200);
         return;
     }
     ++level;
@@ -12,7 +12,7 @@ function nextLevel(){
 
 function prevLevel(){
     if (level === 1) {
-        alert("It is the easiest Level!");
+        setTimeout(() => alert("It is the easiest Level!"), 200);
         return;
     }
     --level;

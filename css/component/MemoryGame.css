@@ -43,12 +43,12 @@
 
 .board {
     display: inline-grid;
-    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-columns: 48px 2fr 48px;
 }
 
 .arrow-buttons {
     width: 30px;
-    /*position: absolute;*/
+    padding: 10px;
 }
 
 .left-button {

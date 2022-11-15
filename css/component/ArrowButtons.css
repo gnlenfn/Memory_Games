@@ -1,0 +1,23 @@
+.arrow-buttons {
+    background-color: transparent;
+    border: transparent;
+
+    align-self: center;
+    color: white;
+}
+
+.arrow-buttons img {
+    width: 48px;
+    height: 48px;
+}
+
+.right-button:active {
+    transform: translateX(4px);
+}
+
+.left-button {
+    transform: rotate(180deg);
+}
+.left-button:active {
+    transform: rotate(180deg) translateX(4px);
+}
