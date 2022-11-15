@@ -36,10 +36,14 @@ function newRecord() {
     let ranking = localStorage.getItem(RANK_KEY);
     let parsed;
 
-    const record = `${document.querySelector("#sec").innerText}:` +
-                   `${document.querySelector("#micro").innerText}`;
+    let record = `${document.querySelector("#sec").innerText}:` +
+        `${document.querySelector("#micro").innerText}`;
 
-    if(ranking === null){
+    if (getLevel() === '3') {
+        record = `${document.querySelector("#min").innerText}:` + record;
+    }
+    console.log(record);
+    if (ranking === null) {
         parsed = [];
     } else {
         parsed = JSON.parse(ranking);

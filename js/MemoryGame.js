@@ -54,6 +54,7 @@ function initBoard(level) {
         card.style.height = `calc(${100 / (2 * level )}$ - 10px)`;
 
     })
+    resetTimer();
 }
 
 function flipCard() {
@@ -116,6 +117,9 @@ function gameEnd() {
     setTimeout(() => alert("Done!"), 500);
     console.log("Memory Game Done");
 
+    onWork = false;
+    document.querySelector(".left-button").addEventListener("click", prevLevel);
+    document.querySelector(".right-button").addEventListener("click", nextLevel);
     // disabling start button
     document.querySelector(".watch-button").disabled = true;
     newRecord();
