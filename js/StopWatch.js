@@ -3,6 +3,32 @@ let timer_sec;
 let timer_min;
 let timer = 0;
 
+function createWatch() {
+    let timer = document.querySelector(".stop-watch #record");
+
+    if(getLevel() === '3'){
+        let min = document.createElement("span");
+        min.id = "min";
+        min.innerText = "00";
+        timer.appendChild(min);
+    } else if (getLevel() < 3 && document.querySelector("#min")) {
+        document.querySelector("#min").remove();
+    }
+
+    if (document.querySelector("#sec") === null) {
+        let sec = document.createElement("span");
+        sec.id = "sec";
+        sec.innerText = "00";
+        timer.appendChild(sec);
+    }
+
+    if (document.querySelector("#micro") === null) {
+        let micro = document.createElement("span");
+        micro.id = "micro";
+        micro.innerText = "00";
+        timer.appendChild(micro);
+    }
+}
 
 function startTimer() {
     if(timer > 0) {
