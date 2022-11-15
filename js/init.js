@@ -1,2 +1,2 @@
-initBoard();
+initBoard(1);
 addListenerToButton();

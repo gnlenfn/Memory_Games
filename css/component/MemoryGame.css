@@ -40,3 +40,20 @@
     transform: rotateY(180deg);
 
 }
+
+.board {
+    display: inline-grid;
+    grid-template-columns: 1fr 2fr 1fr;
+}
+
+.arrow-buttons {
+    width: 30px;
+    /*position: absolute;*/
+}
+
+.left-button {
+    justify-self: end;
+}
+.right-button {
+    justify-self: start;
+}

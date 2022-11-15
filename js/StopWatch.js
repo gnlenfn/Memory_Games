@@ -78,7 +78,9 @@ function addListenerToButton() {
 
     document.querySelector(".reset-button").addEventListener("click", resetTimer);
     document.querySelector(".reset-button").addEventListener("click", revealButton);
-    document.querySelector(".reset-button").addEventListener("click", initBoard)
+    document.querySelector(".reset-button").addEventListener("click", function () {
+        initBoard(level);
+    })
 }
 
 

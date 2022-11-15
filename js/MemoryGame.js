@@ -4,12 +4,17 @@ let hasFlippedCard = false;
 let lockBoard = false;
 let firstCard, secondCard;
 let flippedCount = 0;
-let level = 2;
-let cardsCount = Math.pow(2 * level, 2);
+let level = 1;
+let cardsCount;
 const badges = ["angular", "aurelia", "aws", "backbone", "elasticsearch", "ember", "fastapi", "go", "hadoop",
                 "intellij", "kubernetes", "mongodb", "mysql", "react", "redis", "spring", "vscode", "vue"];
 
-function addCardsOnBoard() {
+
+function getLevel(){
+    return level.toString();
+}
+
+function addCardsOnBoard(cardsCount) {
     let board = document.querySelector(".memory-game");
     badges.slice(0, cardsCount / 2).forEach((name) => {
         for(let i = 0; i < 2; i++){
@@ -33,14 +38,15 @@ function addCardsOnBoard() {
     })
 }
 
-function initBoard() {
+function initBoard(level) {
     if(document.querySelectorAll(".memory-card")) {
         document.querySelectorAll(".memory-card").forEach(
             (card) => card.remove()
         );
     }
     shuffle(badges)
-    addCardsOnBoard();
+    cardsCount = Math.pow(2 * level, 2);
+    addCardsOnBoard(cardsCount);
 
     let cardList = document.querySelectorAll(".memory-card");
     cardList.forEach((card) => {

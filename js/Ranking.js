@@ -1,8 +1,9 @@
 const ranks = document.querySelector("#ranking-list");
-const RANK_KEY = `Lv${level}`;
+let RANK_KEY;
 
 
 function saveRecord(parsed) {
+    RANK_KEY = getLevel();
     parsed.sort();
     localStorage.setItem(RANK_KEY, JSON.stringify(parsed));
 }
@@ -22,14 +23,16 @@ function showRankings() {
         root.removeChild(root.firstChild);
     }
 
+    RANK_KEY = getLevel();
     const savedRanking = localStorage.getItem(RANK_KEY);
-    const parsedRanking = JSON.parse(savedRanking);
+    const parsedRanking = (savedRanking) ? JSON.parse(savedRanking) : [];
 
     parsedRanking.sort();
     parsedRanking.slice(0, 5).forEach(addList)
 }
 
 function newRecord() {
+    RANK_KEY = getLevel();
     let ranking = localStorage.getItem(RANK_KEY);
     let parsed;
 
@@ -48,6 +51,7 @@ function newRecord() {
 }
 
 // Record exists
+RANK_KEY = getLevel();
 const savedRanking = localStorage.getItem(RANK_KEY);
 if (savedRanking) {
     showRankings();
