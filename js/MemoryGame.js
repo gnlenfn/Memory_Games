@@ -44,7 +44,14 @@ function initBoard(level) {
             (card) => card.remove()
         );
     }
-    shuffle(badges)
+    if (level === 1) {
+        document.querySelector(".memory-game").style.width = "320px";
+        document.querySelector(".memory-game").style.height = "320px";
+    } else {
+        document.querySelector(".memory-game").style.width = "640px";
+        document.querySelector(".memory-game").style.height = "640px";
+    }
+    shuffle(badges);
     cardsCount = Math.pow(2 * level, 2);
     addCardsOnBoard(cardsCount);
 

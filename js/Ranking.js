@@ -42,7 +42,6 @@ function newRecord() {
     if (getLevel() === '3') {
         record = `${document.querySelector("#min").innerText}:` + record;
     }
-    console.log(record);
     if (ranking === null) {
         parsed = [];
     } else {
