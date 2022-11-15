@@ -31,6 +31,10 @@ span {
     z-index: 5;
 }
 
+.watch-button:active {
+    transform: translateY(2px) ;
+}
+
 
 .start-button {
     background-color: yellowgreen;
@@ -39,6 +43,6 @@ span {
 .overlapped {
     position: relative;
     top: -50px;
-
+    visibility: hidden;
     z-index: 1;
 }
