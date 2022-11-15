@@ -7,7 +7,7 @@ let onWork = false;
 function createWatch() {
     let timer = document.querySelector(".stop-watch #record");
 
-    if(getLevel() === '3' && !document.querySelector("#min")){
+    if(getLevel() === MAX_LEVEL.toString() && !document.querySelector("#min")){
         let min = document.createElement("span");
         const colon = document.createElement("span");
         colon.innerText = ":";
@@ -17,7 +17,7 @@ function createWatch() {
         min.innerText = "00";
         timer.insertBefore(min, document.querySelector("#sec"));
         timer.insertBefore(colon, document.querySelector("#sec"));
-    } else if (getLevel() < 3 && document.querySelector("#min")) {
+    } else if (getLevel() < MAX_LEVEL && document.querySelector("#min")) {
         document.querySelector("#min").remove();
         document.querySelector("#min-colon").remove();
     }
@@ -49,7 +49,7 @@ function startTimer() {
     let min;
     let micro = parseInt(document.getElementById("micro").innerText);
     let sec = parseInt(document.getElementById("sec").innerText);
-    if (getLevel() === '3') {
+    if (getLevel() === MAX_LEVEL.toString()) {
         min = parseInt(document.getElementById("min").innerText);
     }
 
@@ -106,13 +106,17 @@ function stopTimer() {
 }
 
 function hideButton() {
-    const btn = document.querySelector(".start-button");
-    btn.style.visibility = "hidden";
+    const btnStart = document.querySelector(".start-button");
+    const btnReset = document.querySelector(".reset-button");
+    btnStart.style.visibility = "hidden";
+    btnReset.style.visibility = "visible";
 }
 
 function revealButton() {
-    const btn = document.querySelector(".start-button");
-    btn.style.visibility = "visible";
+    const btnStart = document.querySelector(".start-button");
+    const btnReset = document.querySelector(".reset-button");
+    btnStart.style.visibility = "visible";
+    btnReset.style.visibility = "hidden";
 }
 
 function addListenerToButton() {

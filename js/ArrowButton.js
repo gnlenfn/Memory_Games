@@ -1,5 +1,5 @@
 function nextLevel(){
-    if(level === 3) {
+    if(level === MAX_LEVEL) {
         setTimeout(() => alert("It is the hardest Level!"), 200);
         return;
     }

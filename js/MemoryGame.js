@@ -8,7 +8,7 @@ let level = 1;
 let cardsCount;
 const badges = ["angular", "aurelia", "aws", "backbone", "elasticsearch", "ember", "fastapi", "go", "hadoop",
                 "intellij", "kubernetes", "mongodb", "mysql", "react", "redis", "spring", "vscode", "vue"];
-
+const MAX_LEVEL = 3;
 
 function getLevel(){
     return level.toString();
