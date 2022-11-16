@@ -1,6 +1,9 @@
 function saveRecord(parsed) {
     RANK_KEY = getLevel();
     parsed.sort();
+    if(parsed.length > 5) {
+        parsed.pop();
+    }
     localStorage.setItem(RANK_KEY, JSON.stringify(parsed));
 }
 
