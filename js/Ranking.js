@@ -1,7 +1,3 @@
-const ranks = document.querySelector("#ranking-list");
-let RANK_KEY;
-
-
 function saveRecord(parsed) {
     RANK_KEY = getLevel();
     parsed.sort();
@@ -9,6 +5,7 @@ function saveRecord(parsed) {
 }
 
 function addList(record) {
+    const ranks = document.querySelector("#ranking-list");
     const li = document.createElement("li");
     const span = document.createElement("span");
     span.innerText = record;
@@ -53,9 +50,3 @@ function newRecord() {
     showRankings();
 }
 
-// Record exists
-RANK_KEY = getLevel();
-const savedRanking = localStorage.getItem(RANK_KEY);
-if (savedRanking) {
-    showRankings();
-}

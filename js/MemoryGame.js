@@ -1,5 +1,3 @@
-
-
 let hasFlippedCard = false;
 let lockBoard = false;
 let firstCard, secondCard;
@@ -9,6 +7,7 @@ let cardsCount;
 const badges = ["angular", "aurelia", "aws", "backbone", "elasticsearch", "ember", "fastapi", "go", "hadoop",
                 "intellij", "kubernetes", "mongodb", "mysql", "react", "redis", "spring", "vscode", "vue"];
 const MAX_LEVEL = 3;
+const CARD_IMG_PATH = "img/cards/"
 
 function getLevel(){
     return level.toString();
@@ -24,11 +23,11 @@ function addCardsOnBoard(cardsCount) {
 
             let front = document.createElement("img");
             front.classList.add("front-face");
-            front.src = "img/" + name + ".svg";
+            front.src = CARD_IMG_PATH + `${name}.svg`;
 
             let back = document.createElement("img");
             back.classList.add("back-face");
-            back.src = "img/js-badge.svg";
+            back.src = CARD_IMG_PATH + "js-badge.svg";
 
             badge.appendChild(front);
             badge.appendChild(back);
@@ -131,10 +130,4 @@ function gameEnd() {
     document.querySelector(".watch-button").disabled = true;
     newRecord();
     flippedCount = 0;
-}
-
-function flipBoard() {
-    resetBoard();
-    document.querySelectorAll(".memory-card").forEach((element) =>
-        element.classList.remove("flip"));
 }

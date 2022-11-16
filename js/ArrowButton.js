@@ -21,6 +21,3 @@ function prevLevel(){
     revealButton();
     createWatch();
 }
-
-document.querySelector(".left-button").addEventListener("click", prevLevel);
-document.querySelector(".right-button").addEventListener("click", nextLevel);
