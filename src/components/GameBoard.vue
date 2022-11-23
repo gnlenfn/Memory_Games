@@ -1,144 +1,144 @@
 <template>
-  <div class="board">
+    <div class="board">
 
-    <div class="memory-game">
-<!--      각각 뒤집기?-->
-      <div class="memory-card"
-           v-for="(card) in badges"
-           :class="{flip: card.flipped}"
-           :key="card.id"
-           @click="card.clickable ?  flipCard(card) : null"
-      >
-        <img
-            class="front-face"
-            :src="require(`@/assets/cards/${card.framework}.svg`)"
-            :data-framework="card"
-            alt="#"
-        />
-        <img
-            class="back-face"
-            :src="require(`@/assets/cards/${jsBadge}.svg`)"
-            alt="#"
-        />
-      </div>
+        <div class="memory-game">
+            <div v-for="(card) in badges"
+                 :key="card.id"
+                 :class="{flip: card.flipped}"
+                 class="memory-card"
+                 @click="card.clickable ?  flipCard(card) : null"
+            >
+                <img
+                    :data-framework="card"
+                    :src="require(`@/assets/cards/${card.framework}.svg`)"
+                    alt="#"
+                    class="front-face"
+                />
+                <img
+                    :src="require(`@/assets/cards/${jsBadge}.svg`)"
+                    alt="#"
+                    class="back-face"
+                />
+            </div>
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
 import cards from "@/assets/data.js";
 
 export default {
-  name: "GameBoard",
+    name: "GameBoard",
 
-  data() {
-    return {
-      badges: cards,
-      isSelected: [],
-      firstCard: null,
-      secondCard: null,
-      jsBadge: "js-badge",
-      matchedCards: 0,
+    data() {
+        return {
+            badges: cards,
+            isSelected: [],
+            firstCard: null,
+            secondCard: null,
+            jsBadge: "js-badge",
+            matchedCards: 0,
+            lockBoard: false,
+            hasFlippedCard: false,
+        }
+    },
+
+    methods: {
+        flipCard(c) {
+            if (this.lockBoard) return;
+            if (c === this.firstCard) return;
+            if (!this.hasFlippedCard) {
+                this.firstCard = c;
+                this.hasFlippedCard = true;
+                c.flipped = !c.flipped;
+                return;
+            }
+
+            this.secondCard = c;
+            c.flipped = !c.flipped;
+
+            this.checkForMatch();
+        },
+
+        checkForMatch() {
+            let isMatch = this.firstCard.framework === this.secondCard.framework;
+            isMatch ? this.disableCards() : this.recoverCards();
+        },
+
+        disableCards() {
+            // this.matchedCards += 2;
+            this.$store.commit("MATCHED");
+            this.firstCard.clickable = false;
+            this.secondCard.clickable = false;
+            this.resetBoard();
+        },
+
+        recoverCards() {
+            this.lockBoard = true;
+
+            setTimeout(() => {
+                this.firstCard.flipped = !this.firstCard.flipped;
+                this.secondCard.flipped = !this.secondCard.flipped;
+                this.resetBoard();
+            }, 750);
+        },
+
+        resetBoard() {
+            [this.hasFlippedCard, this.lockBoard] = [false, false];
+            [this.firstCard, this.secondCard] = [null, null];
+        },
+
+        shuffle(arr) {
+            arr.sort(() => Math.random() - 0.5);
+        }
+    },
+
+    created() {
+        this.shuffle(this.badges)
     }
-  },
-  // beforeMount(){
-  //   console.log(this.firstCard.id, this.secondCard.id);
-  // },
-
-  methods: {
-    flipCard(c) {
-
-      if (c === this.firstCard) return;
-      if (!this.firstCard) {
-        this.firstCard = c;
-        this.toggleSelected(c);
-        // console.log("first")
-        return;
-      }
-
-      this.secondCard = c;
-      this.toggleSelected(c);
-      // console.log("second");
-      this.checkForMatch();
-    },
-
-    toggleSelected(card) {
-      // console.log(card);
-      // if(this.isSelected.includes(card.id)) {
-      //   this.isSelected = this.isSelected.filter(s => s !== card.id);
-      // }
-      // else {
-      //   this.isSelected.push(card.id);
-      // }
-      card.flipped = !card.flipped;
-      // console.log(this.isSelected);
-    },
-
-    checkForMatch(){
-      let isMatch = this.firstCard.framework === this.secondCard.framework;
-      console.log(isMatch);
-      isMatch ? this.disableCards() : this.recoverCards();
-    },
-
-    disableCards() {
-      this.matchedCards += 2;
-      this.firstCard.clickable = false;
-      this.secondCard.clickable = false;
-    },
-
-    recoverCards() {
-      setTimeout(() => {
-        this.toggleSelected(this.firstCard);
-        this.toggleSelected(this.secondCard);
-      }, 750);
-    },
-
-    shuffle(arr) {
-      arr.sort(() => Math.random() -0.5);
-    }
-  },
-
-  created() {
-    this.shuffle(this.badges)
-  }
 }
 </script>
 
 <style scoped>
 .memory-game {
-  width: 640px;
-  height: 640px;
-  display: flex;
-  flex-wrap: wrap;
-  perspective: 1000px;
-  margin: 100px auto;
+    width: 640px;
+    height: 640px;
+    display: flex;
+    flex-wrap: wrap;
+    perspective: 1000px;
+    margin: 100px auto;
 }
+
 .memory-card {
-  margin: 5px;transform: scale(1);
-  transform-style: preserve-3d;
-  transition: transform .5s;
-  width: calc(25% - 10px);
-  height: calc(25% - 10px);
+    margin: 5px;
+    transform: scale(1);
+    transform-style: preserve-3d;
+    transition: transform .5s;
+    width: calc(25% - 10px);
+    height: calc(25% - 10px);
 }
 
 .memory-card:active {
-  transform: scale(0.97);
-  transition: transform .2s;
+    transform: scale(0.97);
+    transition: transform .2s;
 }
+
 .front-face,
 .back-face {
-  width: 70%;
-  height: 70%;
-  padding: 20px;
-  border-radius: 5px;
-  background: lightseagreen;
-  backface-visibility: hidden;
+    width: 70%;
+    height: 70%;
+    padding: 20px;
+    border-radius: 5px;
+    background: lightseagreen;
+    backface-visibility: hidden;
 }
+
 .front-face {
-  transform: rotateY(180deg);
-  position: absolute;
+    transform: rotateY(180deg);
+    position: absolute;
 }
+
 .memory-card.flip {
-  transform: rotateY(180deg);
+    transform: rotateY(180deg);
 }
 </style>
