@@ -1,104 +1,123 @@
 <template>
-  <div>
-    <div class="stop-watch">
-      <p>
-        <span>{{display}}:{{displayMs}}</span>
-      </p>
-    </div>
+    <div>
+        <div class="stop-watch">
+            <p>
+                <span>{{ display }}:{{ displayMs }}</span>
+            </p>
+        </div>
 
-    <div class="controls">
-      <button class="watch-button color-button" @click="start" v-if="isStopped">Start</button>
-      <button class="watch-button" @click="stop" v-if="!isStopped">Reset</button>
+        <div class="controls">
+            <button v-if="!isStarted" class="watch-button color-button" @click="start">Start</button>
+            <button v-if="isStarted" class="watch-button" @click="stop">Reset</button>
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
 
 export default {
-  props: [
-      'id'
-  ],
-  data() {
-    return {
-      title: "Timer",
-      display: "00:00",
-      displayMs: "00",
-      m: 0,
-      s: 0,
-      DEFAULT_SECONDS: 0,
-      targetTimestamp: 0,
-      isStarted: false,
-      isStopped: true,
-      interval: () => {}
-    }
-  },
-  methods: {
-    start() {
-      this.targetTimestamp = Date.now() - this.DEFAULT_SECONDS;
-      this.interval = setInterval(() => {
-        this.updateDisplay();
-      }, 10);
-      this.isStarted = true;
-      this.isStopped = false;
+    props: [
+        'id'
+    ],
+    data() {
+        return {
+            title: "Timer",
+            display: "00:00",
+            displayMs: "00",
+            m: 0,
+            s: 0,
+            ms: 0,
+            targetTimestamp: 0,
+            isStarted: false,
+            interval: () => {
+            }
+        }
     },
-    pause() {
-      clearInterval(this.interval);
-      this.updateDisplay();
-      this.isStarted = false;
-    },
-    stop() {
-      if(this.isStarted) this.pause();
-      this.reset();
-      this.updateDisplay();
-      this.isStopped = true;
-    },
-    reset() {
-      this.targetTimestamp = Date.now() + this.DEFAULT_SECONDS;
-    },
-    updateDisplay() {
-      const s = Math.abs(Date.now() - this.targetTimestamp) / 1000;
-      this.ms = Math.floor((s % 10) * 1000);
-      this.s = Math.floor(s % 60);
-      this.m = Math.floor(s / 60) % 60;
+    methods: {
+        start() {
+            this.targetTimestamp = Date.now();
+            this.interval = setInterval(() => {
+                this.updateDisplay();
+            }, 10);
+            this.isStarted = true;
+        },
+        pause() {
+            clearInterval(this.interval);
+        },
+        stop() {
+            if (this.isStarted) this.pause();
+            this.reset();
+            this.updateDisplay();
+            this.$store.state.ended = false;
+            this.$store.commit("RESET_BOARD");
+        },
+        reset() {
+            this.targetTimestamp = Date.now();
+            this.$store.state.matchedCards = 0;
+            this.isStarted = false;
+        },
+        updateDisplay() {
+            const millisecond = (Date.now() - this.targetTimestamp);
+            this.ms = Math.floor(millisecond);
+            this.s = Math.floor(millisecond / 1000) % 60;
+            this.m = Math.floor(millisecond / 60000);
 
-      let display = this.s.toString().padStart(2, '0');
-      display = this.m.toString().padStart(2, '0') + ':' + display;
-      this.display = display;
-      this.displayMs = ("00" + this.ms).slice(-2);
+            let display = this.s.toString().padStart(2, '0');
+            display = this.m.toString().padStart(2, '0') + ':' + display;
+            this.display = display;
+            this.displayMs = ("00" + this.ms).slice(-2);
+        }
     },
-  }
+    computed: {
+        matchedCardNums() {
+            return this.$store.state.matchedCards;
+        }
+    },
+    watch: {
+        matchedCardNums(value) {
+            if(value === 16) {
+                this.$store.state.ended = true;
+                this.pause();
+                setTimeout(() =>
+                    alert("Done!"), 500);
+            }
+        }
+    }
 }
 </script>
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Boogaloo&display=swap');
+
 .stop-watch {
-  font-family: "Boogaloo", cursive;
-  grid-column-end: span 3;
+    font-family: "Boogaloo", cursive;
+    grid-column-end: span 3;
 }
+
 span {
-  font-size: 100px;
+    font-size: 100px;
 }
 
 .watch-button {
-  border: none;
-  margin: auto;
-  width: 100px;
-  padding: 10px 20px;
-  border-radius: 15px;
-  font-family: "Boogaloo", cursive;
-  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 25px;
-  background-color: floralwhite;
-  z-index: 5;
+    border: none;
+    margin: auto;
+    width: 100px;
+    padding: 10px 20px;
+    border-radius: 15px;
+    font-family: "Boogaloo", cursive;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 25px;
+    background-color: floralwhite;
+    z-index: 5;
 }
+
 .watch-button:active {
-  transform: translateY(2px) ;
+    transform: translateY(2px);
 }
+
 .color-button {
-  background-color: yellowgreen;
+    background-color: yellowgreen;
 }
 </style>

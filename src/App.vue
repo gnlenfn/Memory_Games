@@ -11,7 +11,10 @@ import StopWatch from "@/components/StopWatch";
 import GameBoard from "@/components/GameBoard";
 
 export default {
-    components: {StopWatch, GameBoard}
+    components: {
+        StopWatch,
+        GameBoard
+    }
 }
 
 

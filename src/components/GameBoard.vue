@@ -1,6 +1,5 @@
 <template>
     <div class="board">
-
         <div class="memory-game">
             <div v-for="(card) in badges"
                  :key="card.id"
@@ -25,14 +24,12 @@
 </template>
 
 <script>
-import cards from "@/assets/data.js";
 
 export default {
     name: "GameBoard",
 
     data() {
         return {
-            badges: cards,
             isSelected: [],
             firstCard: null,
             secondCard: null,
@@ -66,11 +63,10 @@ export default {
         },
 
         disableCards() {
-            // this.matchedCards += 2;
             this.$store.commit("MATCHED");
             this.firstCard.clickable = false;
             this.secondCard.clickable = false;
-            this.resetBoard();
+            this.resetSelected();
         },
 
         recoverCards() {
@@ -79,22 +75,33 @@ export default {
             setTimeout(() => {
                 this.firstCard.flipped = !this.firstCard.flipped;
                 this.secondCard.flipped = !this.secondCard.flipped;
-                this.resetBoard();
+                this.resetSelected();
             }, 750);
         },
 
-        resetBoard() {
+        resetSelected() {
             [this.hasFlippedCard, this.lockBoard] = [false, false];
             [this.firstCard, this.secondCard] = [null, null];
         },
 
         shuffle(arr) {
             arr.sort(() => Math.random() - 0.5);
+        },
+
+        resetBoard() {
+            this.badges.forEach((card) => {
+                card.flipped = false;
+            });
+        }
+    },
+    computed: {
+        badges() {
+            return this.$store.state.badges;
         }
     },
 
     created() {
-        this.shuffle(this.badges)
+        this.shuffle(this.badges);
     }
 }
 </script>
