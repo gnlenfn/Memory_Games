@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
+    <title>Memory Game</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="stop-watch">
+            <h1 id="record">
+<!--                timer created by javascript-->
+            </h1>
+            <div class="start-button watch-button">start</div>
+            <div class="reset-button watch-button overlapped">reset</div>
+        </div>
+
+
+        <div class="dummy"></div>
+
+
+        <div class="board">
+            <button class="arrow-buttons left-button" type="button">
+                <img src="img/component/right-arrow.svg" alt=""/>
+            </button>
+
+            <div class="memory-game">
+                <!--            cards created by javascript-->
+            </div>
+            <button class="arrow-buttons right-button" type="button">
+                <img src="img/component/right-arrow.svg" alt=""/>
+            </button>
+        </div>
+
+
+        <div class="ranking-class">
+            <h1>RANKING</h1>
+            <ol class="ranking-list" id="ranking-list">
+<!--                list created by javascript-->
+            </ol>
+        </div>
+
+    </div>
+
+    <script src="js/MemoryGame.js"></script>
+    <script src="js/StopWatch.js"></script>
+    <script src="js/Ranking.js"></script>
+    <script src="js/ArrowButton.js"></script>
+    <script src="js/init.js"></script>
+</body>
+</html>
+

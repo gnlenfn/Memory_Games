@@ -1,0 +1,48 @@
+.stop-watch {
+    align-items: center;
+    text-align: center;
+    margin-top: 100px;
+    font-family: "Boogaloo", cursive;
+    grid-column-end: span 3;
+}
+
+p {
+    font-size: 50px;
+}
+
+span {
+    font-size: 100px;
+}
+
+.watch-button {
+    position: relative;
+    border: none;
+    margin: auto;
+    display: block;
+    width: 100px;
+    padding: 10px 20px;
+    border-radius: 15px;
+    font-family: "Boogaloo", cursive;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 25px;
+    background-color: floralwhite;
+    z-index: 5;
+}
+
+.watch-button:active {
+    transform: translateY(2px) ;
+}
+
+
+.start-button {
+    background-color: yellowgreen;
+}
+
+.overlapped {
+    position: relative;
+    top: -50px;
+    visibility: hidden;
+    z-index: 1;
+}
