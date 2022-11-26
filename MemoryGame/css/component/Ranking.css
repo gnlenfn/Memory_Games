@@ -1,0 +1,43 @@
+.ranking-class {
+    text-align: left;
+    font-family: "Boogaloo", cursive;
+    padding: 60px;
+    margin: 0 0;
+}
+
+.ranking-class span {
+    font-size: 25px;
+}
+
+.ranking-class h1 {
+    margin-bottom: 10px;
+    font-size: 55px;
+}
+
+.ranking-list {
+    font-size: 25px;
+    list-style: none;
+    counter-reset: item;
+}
+
+li {
+    counter-increment: item;
+    margin-bottom: 5px;
+}
+
+li::before{
+    margin-right: 10px;
+    content: counter(item);
+    background: lightblue;
+    border-radius: 100%;
+    color: white;
+    width: 1.2em;
+    text-align: center;
+    display: inline-block;
+}
+
+li:first-child span{
+    color: greenyellow;
+}
+
+
