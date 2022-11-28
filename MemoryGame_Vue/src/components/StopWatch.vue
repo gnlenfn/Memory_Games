@@ -40,7 +40,6 @@ export default {
                 this.updateDisplay();
             }, 10);
             this.isStarted = true;
-            this.$store.commit("ENABLE_CLICK_AFTER_START");
         },
         pause() {
             clearInterval(this.interval);
@@ -51,9 +50,6 @@ export default {
             this.updateDisplay();
             this.$store.state.ended = false;
             this.$store.commit("RESET_BOARD");
-            setTimeout(() => {
-                this.$store.commit("SHUFFLE")
-            }, 300);
         },
         reset() {
             this.targetTimestamp = Date.now();
@@ -72,9 +68,14 @@ export default {
             this.displayMs = ("00" + this.ms).slice(-2);
         }
     },
+    computed: {
+        matchedCardNums() {
+            return this.$store.state.matchedCards;
+        }
+    },
     watch: {
-        "$store.state.matchedCards"(value) {
-            if (value === 16) {
+        matchedCardNums(value) {
+            if(value === 16) {
                 this.$store.state.ended = true;
                 this.pause();
                 setTimeout(() =>
