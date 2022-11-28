@@ -24,8 +24,17 @@ export default new Vuex.Store({
         RESET_BOARD(state) {
             state.badges.forEach((card) => {
                 card.flipped = false;
+                card.clickable = false;
             });
         },
+        ENABLE_CLICK_AFTER_START(state) {
+            state.badges.forEach((card) => {
+                card.clickable = true;
+            });
+        },
+        SHUFFLE(state) {
+            state.badges.sort(() => Math.random() - 0.5);
+        }
     },
     actions: {},
     modules: {}

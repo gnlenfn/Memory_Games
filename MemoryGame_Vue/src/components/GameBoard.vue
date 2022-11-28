@@ -101,7 +101,7 @@ export default {
     },
 
     created() {
-        this.shuffle(this.badges);
+        this.$store.commit("SHUFFLE");
     }
 }
 </script>
