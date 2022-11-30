@@ -10,7 +10,7 @@
                 v-for="(record, idx) in totalRecords"
                 :key="idx"
             >
-                <span>{{ record }}</span>
+                <span>{{ record.user }} : {{ record.record }}</span>
             </div>
         </div>
         <div
@@ -23,7 +23,7 @@
                 v-for="(record, idx) in userRecords"
                 :key="idx"
             >
-                <span>{{ record }}</span>
+                <span>{{ record.user }} : {{ record.record }}</span>
             </div>
         </div>
     </div>
@@ -34,17 +34,28 @@ export default {
     name: "Leader-Board",
     data() {
         return {
-            user: this.$store.state.user,
             userMode: false,
-            totalRecords: JSON.parse(localStorage.getItem('total')),
-            userRecords: JSON.parse(localStorage.getItem(this.user)),
         }
     },
     methods: {
         toggle() {
+            if (this.user === null) {
+                return;
+            }
             this.userMode = !this.userMode;
         }
+    },
+    computed: {
+        user() {
+            return this.$store.state.user;
+        },
+        totalRecords() {
+            return JSON.parse(localStorage.getItem('total'));
+        },
+        userRecords() {
+            return JSON.parse(localStorage.getItem(this.user))
         }
+    }
 }
 </script>
 
