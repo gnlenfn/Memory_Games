@@ -64,9 +64,9 @@ export default {
             this.updateDisplay();
             this.$store.state.ended = false;
             this.$store.commit("RESET_BOARD");
-            // setTimeout(() => {
-            //     this.$store.commit("SHUFFLE")
-            // }, 300);
+            setTimeout(() => {
+                this.$store.commit("SHUFFLE")
+            }, this.TRANSITION);
         },
         stop() {
             this.targetTimestamp = Date.now();
