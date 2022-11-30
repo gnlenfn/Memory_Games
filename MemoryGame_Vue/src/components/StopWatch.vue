@@ -66,7 +66,7 @@ export default {
             this.$store.commit("RESET_BOARD");
             setTimeout(() => {
                 this.$store.commit("SHUFFLE")
-            }, this.TRANSITION);
+            }, this.TRANSITION_FLIP);
         },
         stop() {
             this.targetTimestamp = Date.now();
@@ -104,7 +104,7 @@ export default {
                 this.registerRecord();
 
                 setTimeout(() =>
-                    alert("Done!"), 500);
+                    alert("Done!"), this.TRANSITION_FLIP);
             }
         }
     }

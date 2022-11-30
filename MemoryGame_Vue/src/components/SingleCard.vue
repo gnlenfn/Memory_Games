@@ -64,7 +64,7 @@ export default {
                 this.$store.state.firstCard.flipped = !this.$store.state.firstCard.flipped;
                 this.$store.state.secondCard.flipped = !this.$store.state.secondCard.flipped;
                 this.resetSelected();
-            }, this.TRANSITION_WRONG);
+            }, this.AWAIT_WRONG);
         },
 
         resetSelected() {

@@ -7,8 +7,8 @@ Vue.config.productionTip = false
 
 require("@/assets/styles/main.css")
 
-Vue.prototype.TRANSITION = 300;
-Vue.prototype.TRANSITION_WRONG = 750;
+Vue.prototype.TRANSITION_FLIP = 300;
+Vue.prototype.AWAIT_WRONG = 750;
 
 new Vue({
   // router,
