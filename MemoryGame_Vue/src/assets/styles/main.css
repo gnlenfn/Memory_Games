@@ -16,19 +16,6 @@ body {
 
 }
 
-nav {
-    padding: 30px;
-}
-
-nav a {
-    font-weight: bold;
-    color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-    color: #42b983;
-}
-
 .container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -39,4 +26,43 @@ nav a.router-link-exact-active {
     margin: 0;
     padding: 10px;
     font-size: 30px;
+}
+
+.username {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+input {
+    background-color: transparent;
+    width: 200px;
+    height: 30px;
+    border: 0;
+    border-bottom: 1px solid midnightblue;
+    align-items: center;
+}
+
+input::placeholder {
+    text-align: center;
+    color: midnightblue;
+    opacity: 0.7;
+    font-size: 15px;
+}
+input:focus {
+    color: midnightblue;
+    text-align: center;
+    font-size: 20px;
+    border: 0;
+    border-bottom: 1px solid midnightblue;
+    outline: none;
+}
+.logout {
+    margin: 10px;
+    border-radius: 5px;
+    width: 80px;
+    height: 30px;
+    background-color: transparent;
+    border: solid 2px darkgreen;
+    color: darkgreen;
 }

@@ -3,8 +3,11 @@
         <div>
             <stop-watch/>
             <br/>
-            <input @keyup.enter="addUser" v-if="!$store.state.user"/>
-            <p v-if="$store.state.user" class="current-user"> {{ this.$store.state.user }}</p>
+            <div class="username">
+                <input placeholder="Your Name" @keyup.enter="addUser" v-if="!$store.state.user"/>
+                <p v-if="$store.state.user" class="current-user"> {{ this.$store.state.user }}</p>
+                <button class="logout" v-if="$store.state.user" @click="logout">logout</button>
+            </div>
         </div>
         <div class="container">
             <div/>
@@ -28,6 +31,9 @@ export default {
     methods: {
         addUser(e) {
             this.$store.state.user = e.target.value;
+        },
+        logout() {
+            this.$store.state.user = null;
         }
     }
 }
