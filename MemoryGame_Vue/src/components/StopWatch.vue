@@ -85,7 +85,7 @@ export default {
             this.displayMs = ("00" + this.ms).slice(-2);
         },
         registerRecord() {
-            this.$store.commit('registerRecord', this.$store.state.user);
+            this.$store.dispatch('REGISTER_RECORD', {key: this.$store.state.user});
         },
     },
     computed: {

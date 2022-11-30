@@ -43,42 +43,15 @@ export default new Vuex.Store({
             state.badges.sort(() => Math.random() - 0.5);
         },
 
-        // REGISTER_TOTAL_RECORD(state) {
-        //     let rank = localStorage.getItem('total');
-        //     let parsed;
-        //     parsed = [];
-        //
-        //     if (rank !== null) {
-        //         parsed = JSON.parse(rank);
-        //     }
-        //
-        //     parsed.push(state.record);
-        //
-        //     localStorage.setItem("total", state.record);
-        //     localStorage.setItem(`${state.user}`, state.record);
-        // },
-        // REGISTER_USER_RECORD(state, key) {
-        //     let rank = localStorage.getItem(key);
-        //     let parsed;
-        //
-        //     if (rank === null) {
-        //         parsed = [];
-        //     } else {
-        //         parsed = JSON.parse(rank);
-        //     }
-        //     parsed.push(state.record);
-        // },
-        SAVE_RECORD({parsed, key}) {
-            console.log("save!")
-            console.log(parsed)
-            console.log(key)
-            parsed.sort();
+        SAVE_RECORD(context, {parsed, key}) {
             if (parsed.length > 5) {
                 parsed.pop();
             }
             localStorage.setItem(key, JSON.stringify(parsed));
         },
-        registerRecord(state, key) {
+    },
+    actions: {
+        REGISTER_RECORD({commit, state}, {key}) {
             let totalRank = localStorage.getItem('total');
             let userRank = localStorage.getItem(key);
             let totalParsed, userParsed;
@@ -111,56 +84,10 @@ export default new Vuex.Store({
             totalParsed = totalParsed.sort(compare);
             userParsed = userParsed.sort(compare);
 
-            console.log(totalParsed)
-            if (totalParsed.length > 5) {
-                totalParsed.pop();
-            }
-            if (userParsed.length > 5) {
-                userParsed.pop();
-            }
+            commit('SAVE_RECORD', {parsed: totalParsed, key: 'total'})
+            commit('SAVE_RECORD', {parsed: userParsed, key: key})
 
-            localStorage.setItem("total", JSON.stringify(totalParsed));
-            localStorage.setItem(key, JSON.stringify(userParsed));
-
-            // commit("SAVE_RECORD",{totalParsed, key});
-        }
-    },
-    actions: {
-        // registerRecord({state}, key) {
-        //     let totalRank = localStorage.getItem('total');
-        //     let userRank = localStorage.getItem(key);
-        //     let totalParsed, userParsed;
-        //
-        //     if (totalRank === null) {
-        //         totalParsed = [];
-        //     } else {
-        //         totalParsed = JSON.parse(totalRank);
-        //     }
-        //     console.log(totalParsed);
-        //
-        //     if (userRank === null) {
-        //         userParsed = [];
-        //     } else {
-        //         userParsed = JSON.parse(userRank);
-        //     }
-        //
-        //     totalParsed.push(state.record);
-        //     userParsed.push(state.record);
-        //     totalParsed.sort();
-        //     userParsed.sort();
-        //
-        //     if (totalParsed.length > 5) {
-        //         totalParsed.pop();
-        //     }
-        //     if (userParsed.length > 5) {
-        //         userParsed.pop();
-        //     }
-        //
-        //     localStorage.setItem("total", totalParsed);
-        //     localStorage.setItem(key, userParsed);
-        //
-        //     // commit("SAVE_RECORD",{totalParsed, key});
-        // }
+        },
     },
     modules: {}
 })
