@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="timer">
         <div class="stop-watch">
             <p>
                 <span>{{ display }}:{{ displayMs }}</span>
@@ -7,8 +7,21 @@
         </div>
 
         <div class="controls">
-            <button v-if="!isStarted" class="watch-button color-button" @click="start">Start</button>
-            <button v-if="isStarted" class="watch-button" @click="stop">Reset</button>
+            <button
+                v-if="!isStarted"
+                class="watch-button color-button"
+                @click="start"
+                :disabled="this.$store.state.user === null"
+            >
+                Start
+            </button>
+            <button
+                v-if="isStarted"
+                class="watch-button"
+                @click="reset"
+            >
+                Reset
+            </button>
         </div>
     </div>
 </template>
@@ -45,17 +58,17 @@ export default {
         pause() {
             clearInterval(this.interval);
         },
-        stop() {
+        reset() {
             if (this.isStarted) this.pause();
-            this.reset();
+            this.stop();
             this.updateDisplay();
             this.$store.state.ended = false;
             this.$store.commit("RESET_BOARD");
-            setTimeout(() => {
-                this.$store.commit("SHUFFLE")
-            }, 300);
+            // setTimeout(() => {
+            //     this.$store.commit("SHUFFLE")
+            // }, 300);
         },
-        reset() {
+        stop() {
             this.targetTimestamp = Date.now();
             this.$store.state.matchedCards = 0;
             this.isStarted = false;
@@ -70,6 +83,16 @@ export default {
             display = this.m.toString().padStart(2, '0') + ':' + display;
             this.display = display;
             this.displayMs = ("00" + this.ms).slice(-2);
+        },
+        registerRecord() {
+            // this.$store.dispatch('registerTotalRecord');
+            // this.$store.dispatch('registerRecord', this.$store.state.user);
+            this.$store.commit('registerRecord', this.$store.state.user);
+        },
+    },
+    computed: {
+        username() {
+            return this.$store.state.user;
         }
     },
     watch: {
@@ -77,6 +100,11 @@ export default {
             if (value === 16) {
                 this.$store.state.ended = true;
                 this.pause();
+
+                this.$store.state.record = this.display + ":" + this.displayMs;
+                console.log(this.$store.state.record);
+                this.registerRecord();
+
                 setTimeout(() =>
                     alert("Done!"), 500);
             }
