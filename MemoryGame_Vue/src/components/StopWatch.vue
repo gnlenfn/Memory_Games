@@ -85,8 +85,6 @@ export default {
             this.displayMs = ("00" + this.ms).slice(-2);
         },
         registerRecord() {
-            // this.$store.dispatch('registerTotalRecord');
-            // this.$store.dispatch('registerRecord', this.$store.state.user);
             this.$store.commit('registerRecord', this.$store.state.user);
         },
     },
@@ -114,37 +112,5 @@ export default {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Boogaloo&display=swap');
 
-.stop-watch {
-    font-family: "Boogaloo", cursive;
-    grid-column-end: span 3;
-}
-
-span {
-    font-size: 100px;
-}
-
-.watch-button {
-    border: none;
-    margin: auto;
-    width: 100px;
-    padding: 10px 20px;
-    border-radius: 15px;
-    font-family: "Boogaloo", cursive;
-    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 25px;
-    background-color: floralwhite;
-    z-index: 5;
-}
-
-.watch-button:active {
-    transform: translateY(2px);
-}
-
-.color-button {
-    background-color: yellowgreen;
-}
 </style>

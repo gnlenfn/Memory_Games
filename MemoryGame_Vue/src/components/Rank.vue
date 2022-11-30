@@ -5,26 +5,31 @@
             v-if="!userMode"
         >
             <h1>LEADERBOARD</h1>
-            <div
-                class="total-record-list"
-                v-for="(record, idx) in totalRecords"
-                :key="idx"
-            >
-                <span>{{ record.user }} : {{ record.record }}</span>
-            </div>
+            <ol>
+                <li
+                    class="total-record-list"
+                    v-for="(record, idx) in totalRecords"
+                    :key="idx"
+                >
+                    <span class="user">{{ record.user }}</span> : <span class="record">{{ record.record }}</span>
+                </li>
+
+            </ol>
         </div>
         <div
             @click="toggle"
             v-if="userMode"
         >
             <h1>YOUR RECORD</h1>
-            <div
-                class="user-record-list"
-                v-for="(record, idx) in userRecords"
-                :key="idx"
-            >
-                <span>{{ record.user }} : {{ record.record }}</span>
-            </div>
+            <ol>
+                <li
+                    class="user-record-list"
+                    v-for="(record, idx) in userRecords"
+                    :key="idx"
+                >
+                    <span class="user">{{ record.user }}</span> : <span class="record">{{ record.record }}</span>
+                </li>
+            </ol>
         </div>
     </div>
 </template>

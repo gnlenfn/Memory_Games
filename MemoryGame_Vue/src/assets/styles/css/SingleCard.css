@@ -1,0 +1,50 @@
+.memory-card {
+    margin: 5px;
+    transform: scale(1);
+    transform-style: preserve-3d;
+    transition: transform .5s;
+    width: calc(25% - 10px);
+    height: calc(25% - 10px);
+}
+
+.memory-card:active {
+    transform: scale(0.97);
+    transition: transform .2s;
+}
+
+.memory-card {
+    margin: 5px;
+    transform: scale(1);
+    transform-style: preserve-3d;
+    transition: transform .5s;
+    width: calc(25% - 10px);
+    height: calc(25% - 10px);
+}
+
+.memory-card:active {
+    transform: scale(0.97);
+    transition: transform .2s;
+}
+
+.memory-card.flip {
+    transform: rotateY(180deg);
+}
+
+.front-face,
+.back-face {
+    width: 70%;
+    height: 70%;
+    padding: 20px;
+    border-radius: 5px;
+    background: lightseagreen;
+    backface-visibility: hidden;
+}
+
+.front-face {
+    transform: rotateY(180deg);
+    position: absolute;
+}
+
+.memory-card.flip {
+    transform: rotateY(180deg);
+}
