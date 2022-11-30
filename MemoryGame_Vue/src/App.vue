@@ -1,19 +1,34 @@
 <template>
     <div id="app">
-
-        <stop-watch/>
-        <game-board/>
+        <div>
+            <stop-watch/>
+            <br/>
+            <input @keyup.enter="addUser" v-if="!$store.state.user"/>
+            <p v-if="$store.state.user"> {{ this.$store.state.user }}</p>
+        </div>
+        <div class="container">
+            <div/>
+            <game-board/>
+            <rank/>
+        </div>
     </div>
 </template>
 
 <script>
 import StopWatch from "@/components/StopWatch";
 import GameBoard from "@/components/GameBoard";
+import Rank from "@/components/Rank";
 
 export default {
     components: {
         StopWatch,
-        GameBoard
+        GameBoard,
+        Rank
+    },
+    methods: {
+        addUser(e) {
+            this.$store.state.user = e.target.value;
+        }
     }
 }
 
@@ -45,5 +60,11 @@ nav a {
 
 nav a.router-link-exact-active {
     color: #42b983;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 16px;
 }
 </style>
