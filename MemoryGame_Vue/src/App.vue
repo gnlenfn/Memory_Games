@@ -1,19 +1,43 @@
 <template>
     <div id="app">
-
-        <stop-watch/>
-        <game-board/>
+        <div>
+            <stop-watch/>
+            <br/>
+            <div class="username">
+                <input placeholder="Your Name" @keyup.enter="addUser" v-if="!$store.state.user"/>
+                <p v-if="$store.state.user" class="current-user"> {{ this.$store.state.user }}</p>
+                <button class="logout" v-if="$store.state.user" @click="logout">logout</button>
+            </div>
+        </div>
+        <div class="container">
+            <div/>
+            <game-board/>
+            <rank/>
+        </div>
     </div>
 </template>
 
 <script>
 import StopWatch from "@/components/StopWatch";
 import GameBoard from "@/components/GameBoard";
+import Rank from "@/components/Rank";
 
 export default {
     components: {
         StopWatch,
-        GameBoard
+        GameBoard,
+        Rank
+    },
+    methods: {
+        addUser(e) {
+            this.$store.state.user = e.target.value;
+        },
+        logout() {
+            this.$store.state.user = null;
+        }
+    },
+    created() {
+        this.$store.commit('CREATE_BADGES');
     }
 }
 
@@ -21,29 +45,5 @@ export default {
 </script>
 
 <style>
-body {
-    background: cadetblue;
-}
 
-#app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-
-}
-
-nav {
-    padding: 30px;
-}
-
-nav a {
-    font-weight: bold;
-    color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-    color: #42b983;
-}
 </style>

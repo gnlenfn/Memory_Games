@@ -1,0 +1,50 @@
+.leader-board {
+    text-align: left;
+
+    padding: 60px;
+    margin: 0 0;
+}
+
+.leader-board span {
+    font-size: 25px;
+}
+
+.leader-board h1 {
+    margin-bottom: 10px;
+    font-size: 45px;
+}
+
+.total-record-list,
+.user-record-list {
+    font-size: 25px;
+    font-family: "Boogaloo", cursive;
+    list-style: none;
+    counter-reset: item;
+}
+
+li {
+    counter-increment: item;
+    margin-bottom: 5px;
+}
+
+li::before{
+    margin-right: 10px;
+    content: counter(item);
+    background: lightblue;
+    border-radius: 100%;
+    color: white;
+    width: 1.2em;
+    text-align: center;
+    display: inline-block;
+}
+
+.user {
+    color: blue;
+}
+
+li:first-child span {
+    color: greenyellow;
+}
+li:first-child {
+    color: greenyellow;
+}

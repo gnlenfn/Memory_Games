@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="timer">
         <div class="stop-watch">
             <p>
                 <span>{{ display }}:{{ displayMs }}</span>
@@ -7,8 +7,21 @@
         </div>
 
         <div class="controls">
-            <button v-if="!isStarted" class="watch-button color-button" @click="start">Start</button>
-            <button v-if="isStarted" class="watch-button" @click="stop">Reset</button>
+            <button
+                v-if="!isStarted"
+                class="watch-button color-button"
+                @click="start"
+                :disabled="this.$store.state.user === null"
+            >
+                Start
+            </button>
+            <button
+                v-if="isStarted"
+                class="watch-button"
+                @click="reset"
+            >
+                Reset
+            </button>
         </div>
     </div>
 </template>
@@ -45,17 +58,17 @@ export default {
         pause() {
             clearInterval(this.interval);
         },
-        stop() {
+        reset() {
             if (this.isStarted) this.pause();
-            this.reset();
+            this.stop();
             this.updateDisplay();
             this.$store.state.ended = false;
             this.$store.commit("RESET_BOARD");
             setTimeout(() => {
                 this.$store.commit("SHUFFLE")
-            }, 300);
+            }, this.TRANSITION_FLIP);
         },
-        reset() {
+        stop() {
             this.targetTimestamp = Date.now();
             this.$store.state.matchedCards = 0;
             this.isStarted = false;
@@ -70,15 +83,31 @@ export default {
             display = this.m.toString().padStart(2, '0') + ':' + display;
             this.display = display;
             this.displayMs = ("00" + this.ms).slice(-2);
+        },
+        registerRecord() {
+            this.$store.dispatch('REGISTER_RECORD', {key: this.$store.state.user});
+        },
+    },
+    computed: {
+        username() {
+            return this.$store.state.user;
+        },
+        matchedCardsCount() {
+            return Math.pow(2 * this.$store.state.level, 2)
         }
     },
     watch: {
         "$store.state.matchedCards"(value) {
-            if (value === 16) {
+            if (value === this.matchedCardsCount) {
                 this.$store.state.ended = true;
                 this.pause();
+
+                this.$store.state.record = this.display + ":" + this.displayMs;
+                console.log(this.$store.state.record);
+                this.registerRecord();
+
                 setTimeout(() =>
-                    alert("Done!"), 500);
+                    alert("Done!"), this.TRANSITION_FLIP);
             }
         }
     }
@@ -86,37 +115,5 @@ export default {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Boogaloo&display=swap');
 
-.stop-watch {
-    font-family: "Boogaloo", cursive;
-    grid-column-end: span 3;
-}
-
-span {
-    font-size: 100px;
-}
-
-.watch-button {
-    border: none;
-    margin: auto;
-    width: 100px;
-    padding: 10px 20px;
-    border-radius: 15px;
-    font-family: "Boogaloo", cursive;
-    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 25px;
-    background-color: floralwhite;
-    z-index: 5;
-}
-
-.watch-button:active {
-    transform: translateY(2px);
-}
-
-.color-button {
-    background-color: yellowgreen;
-}
 </style>
