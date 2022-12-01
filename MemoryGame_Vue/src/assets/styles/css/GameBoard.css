@@ -6,3 +6,20 @@
     perspective: 1000px;
     margin: 100px auto;
 }
+
+.board {
+    display: inline-grid;
+    grid-template-columns: 48px 2fr 48px;
+}
+
+.arrow-buttons {
+    width: 30px;
+    padding: 10px;
+}
+
+.left-button {
+    justify-self: end;
+}
+.right-button {
+    justify-self: start;
+}

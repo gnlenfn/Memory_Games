@@ -7,12 +7,12 @@
         :style="cardSize"
     >
         <img
-            :src="require(`@/assets/cards/${card.framework}.svg`)"
+            :src="require(`@/assets/img/cards/${card.framework}.svg`)"
             alt="#"
             class="front-face"
         />
         <img
-            :src="require(`@/assets/cards/js-badge.svg`)"
+            :src="require(`@/assets/img/cards/js-badge.svg`)"
             alt="#"
             class="back-face"
         />
@@ -25,14 +25,6 @@ export default {
     props: [
         'card',
     ],
-    data() {
-        return {
-            size: Math.floor(100 / (2 * this.$store.state.level)) + '%',
-        }
-    },
-    created() {
-        console.log(this.size)
-    },
     methods: {
         flipCard(c) {
             if (this.$store.state.lockBoard) return;
@@ -91,7 +83,7 @@ export default {
     computed: {
         cardSize() {
             return {
-                '--size': this.size
+                '--size': Math.floor(100 / (2 * this.$store.state.level)) + '%'
             }
         }
     }
@@ -99,8 +91,5 @@ export default {
 </script>
 
 <style scoped>
-/*.memory-card {*/
-/*    width: calc(var(--size) - 10px);*/
-/*    height: calc(var(--size) - 10px);*/
-/*}*/
+
 </style>

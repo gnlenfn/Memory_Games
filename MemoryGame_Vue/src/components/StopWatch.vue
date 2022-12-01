@@ -65,7 +65,7 @@ export default {
             this.$store.state.ended = false;
             this.$store.commit("RESET_BOARD");
             setTimeout(() => {
-                this.$store.commit("SHUFFLE")
+                this.$store.dispatch("CREATE_BADGES")
             }, this.TRANSITION_FLIP);
         },
         stop() {

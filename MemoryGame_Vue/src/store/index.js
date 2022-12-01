@@ -50,12 +50,16 @@ export default new Vuex.Store({
             }
             localStorage.setItem(key, JSON.stringify(parsed));
         },
-        CREATE_BADGES(state) {
+    },
+    actions: {
+        CREATE_BADGES({commit, state}) {
             cards.sort(() => Math.random() - 0.5);
             let card_nums = Math.pow(2 * state.level, 2) / 2;
 
-            cards.splice(card_nums);
-            cards.forEach((framework) => {
+            let card_list = cards.slice(0, card_nums);
+            state.badges = []
+
+            card_list.forEach((framework) => {
                 for(let i = 0; i < 2; i++) {
                     state.badges.push(
                         {
@@ -65,14 +69,10 @@ export default new Vuex.Store({
                             checked: 0
                         }
                     )
-                    console.log("push")
                 }
             })
-
-            console.log(state.badges);
-        }
-    },
-    actions: {
+            commit("SHUFFLE");
+        },
         REGISTER_RECORD({commit, state}, {key}) {
             let totalRank = localStorage.getItem('total');
             let userRank = localStorage.getItem(key);
@@ -108,8 +108,23 @@ export default new Vuex.Store({
 
             commit('SAVE_RECORD', {parsed: totalParsed, key: 'total'})
             commit('SAVE_RECORD', {parsed: userParsed, key: key})
-
         },
+        LEVEL_CTR({state}, op) {
+            if (op < 0) {
+                if (state.level === 1) {
+                    alert("This is the easiest one");
+                    return;
+                }
+                state.level--;
+            }
+            else if (op > 0) {
+                if (state.level === 3) {
+                    alert("This is the hardest one");
+                    return;
+                }
+                state.level++;
+            }
+        }
     },
     modules: {}
 })
