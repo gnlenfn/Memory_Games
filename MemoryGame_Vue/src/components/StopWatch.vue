@@ -91,11 +91,14 @@ export default {
     computed: {
         username() {
             return this.$store.state.user;
+        },
+        matchedCardsCount() {
+            return Math.pow(2 * this.$store.state.level, 2)
         }
     },
     watch: {
         "$store.state.matchedCards"(value) {
-            if (value === 16) {
+            if (value === this.matchedCardsCount) {
                 this.$store.state.ended = true;
                 this.pause();
 

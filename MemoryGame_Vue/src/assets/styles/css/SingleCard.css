@@ -1,48 +1,35 @@
 .memory-card {
     margin: 5px;
+    position: relative;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, .3);
     transform: scale(1);
     transform-style: preserve-3d;
-    transition: transform .5s;
-    width: calc(25% - 10px);
-    height: calc(25% - 10px);
+    transition: transform calc(var(--TRANSITION) * 1s);
+    background: lightseagreen;
+    width: calc(var(--size) - 10px);
+    height: calc(var(--size) - 10px);
 }
 
 .memory-card:active {
     transform: scale(0.97);
-    transition: transform .2s;
+    transition: transform calc(var(--TRANSITION) * 1s);
 }
 
-.memory-card {
-    margin: 5px;
-    transform: scale(1);
-    transform-style: preserve-3d;
-    transition: transform .5s;
-    width: calc(25% - 10px);
-    height: calc(25% - 10px);
-}
-
-.memory-card:active {
-    transform: scale(0.97);
-    transition: transform var(--TRANSITION-TIME);
-}
-
-.memory-card.flip {
-    transform: rotateY(180deg);
-}
 
 .front-face,
 .back-face {
-    width: 70%;
-    height: 70%;
-    padding: 20px;
+    width: 80%;
+    height: 80%;
+    position: absolute;
     border-radius: 5px;
-    background: lightseagreen;
+
     backface-visibility: hidden;
+    top: 10%;
+    left: 10%;
 }
 
 .front-face {
     transform: rotateY(180deg);
-    position: absolute;
 }
 
 .memory-card.flip {

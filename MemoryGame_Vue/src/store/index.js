@@ -9,7 +9,8 @@ export default new Vuex.Store({
         user: null,
         matchedCards: 0,
         ended: false,
-        badges: cards,
+        level: 1,
+        badges: [],
         firstCard: null,
         secondCard: null,
         lockBoard: false,
@@ -21,7 +22,7 @@ export default new Vuex.Store({
     mutations: {
         MATCHED(state) {
             state.matchedCards += 2;
-            if (state.matchedCards === 16) {
+            if (state.matchedCards === Math.pow(2 * state.level, 2)) {
                 state.ended = true;
             }
         },
@@ -49,6 +50,27 @@ export default new Vuex.Store({
             }
             localStorage.setItem(key, JSON.stringify(parsed));
         },
+        CREATE_BADGES(state) {
+            cards.sort(() => Math.random() - 0.5);
+            let card_nums = Math.pow(2 * state.level, 2) / 2;
+
+            cards.splice(card_nums);
+            cards.forEach((framework) => {
+                for(let i = 0; i < 2; i++) {
+                    state.badges.push(
+                        {
+                            framework: framework,
+                            clickable: false,
+                            flipped: false,
+                            checked: 0
+                        }
+                    )
+                    console.log("push")
+                }
+            })
+
+            console.log(state.badges);
+        }
     },
     actions: {
         REGISTER_RECORD({commit, state}, {key}) {

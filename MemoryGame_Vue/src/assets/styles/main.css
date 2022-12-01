@@ -2,6 +2,7 @@
 @import "css/SingleCard.css";
 @import "css/Rank.css";
 @import "css/StopWatch.css";
+@import "css/variable.css";
 
 body {
     background: cadetblue;

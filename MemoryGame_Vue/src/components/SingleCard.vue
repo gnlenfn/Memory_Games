@@ -2,10 +2,11 @@
     <div
         :class="{flip: card.flipped}"
         class="memory-card"
+        :data-framework="`${card}`"
         @click="card.clickable ?  flipCard(card) : null"
+        :style="cardSize"
     >
         <img
-            :data-framework="`${card}`"
             :src="require(`@/assets/cards/${card.framework}.svg`)"
             alt="#"
             class="front-face"
@@ -25,7 +26,12 @@ export default {
         'card',
     ],
     data() {
-        return {}
+        return {
+            size: Math.floor(100 / (2 * this.$store.state.level)) + '%',
+        }
+    },
+    created() {
+        console.log(this.size)
     },
     methods: {
         flipCard(c) {
@@ -82,9 +88,19 @@ export default {
             });
         }
     },
+    computed: {
+        cardSize() {
+            return {
+                '--size': this.size
+            }
+        }
+    }
 }
 </script>
 
 <style scoped>
-
+/*.memory-card {*/
+/*    width: calc(var(--size) - 10px);*/
+/*    height: calc(var(--size) - 10px);*/
+/*}*/
 </style>

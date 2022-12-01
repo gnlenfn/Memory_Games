@@ -35,6 +35,9 @@ export default {
         logout() {
             this.$store.state.user = null;
         }
+    },
+    created() {
+        this.$store.commit('CREATE_BADGES');
     }
 }
 
