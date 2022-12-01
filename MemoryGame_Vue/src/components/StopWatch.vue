@@ -54,9 +54,11 @@ export default {
             }, 10);
             this.isStarted = true;
             this.$store.commit("ENABLE_CLICK_AFTER_START");
+            this.$store.state.isWorking = true;
         },
         pause() {
             clearInterval(this.interval);
+            this.$store.state.isWorking = false;
         },
         reset() {
             if (this.isStarted) this.pause();
@@ -103,7 +105,6 @@ export default {
                 this.pause();
 
                 this.$store.state.record = this.display + ":" + this.displayMs;
-                console.log(this.$store.state.record);
                 this.registerRecord();
 
                 setTimeout(() =>

@@ -4,6 +4,7 @@
             class="arrow-buttons left-button"
             type="button"
             @click="moveNext(-1)"
+            :disabled="$store.state.isWorking === true"
         >
             <img src="@/assets/img/right-arrow.svg" alt=""/>
         </button>
@@ -20,6 +21,7 @@
             class="arrow-buttons right-button"
             type="button"
             @click="moveNext(1)"
+            :disabled="$store.state.isWorking === true"
         >
             <img src="@/assets/img/right-arrow.svg" alt=""/>
         </button>

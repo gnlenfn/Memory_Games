@@ -17,6 +17,7 @@ export default new Vuex.Store({
         hasFlippedCard: false,
         selected: [],
         record: "00:00:00",
+        isWorking: false,
     },
     getters: {},
     mutations: {
