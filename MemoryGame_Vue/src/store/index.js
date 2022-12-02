@@ -75,8 +75,8 @@ export default new Vuex.Store({
             commit("SHUFFLE");
         },
         REGISTER_RECORD({commit, state}, {key}) {
-            let totalRank = localStorage.getItem('total');
-            let userRank = localStorage.getItem(key);
+            let totalRank = localStorage.getItem(`total-${state.level}`);
+            let userRank = localStorage.getItem(`${key}-${state.level}`);
             let totalParsed, userParsed;
 
             if (totalRank === null) {
@@ -107,8 +107,8 @@ export default new Vuex.Store({
             totalParsed = totalParsed.sort(compare);
             userParsed = userParsed.sort(compare);
 
-            commit('SAVE_RECORD', {parsed: totalParsed, key: 'total'})
-            commit('SAVE_RECORD', {parsed: userParsed, key: key})
+            commit('SAVE_RECORD', {parsed: totalParsed, key: `total-${state.level}`})
+            commit('SAVE_RECORD', {parsed: userParsed, key: `${key}-${state.level}`})
         },
         LEVEL_CTR({state}, op) {
             if (op < 0) {

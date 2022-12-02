@@ -55,10 +55,10 @@ export default {
             return this.$store.state.user;
         },
         totalRecords() {
-            return JSON.parse(localStorage.getItem('total'));
+            return JSON.parse(localStorage.getItem(`total-${this.$store.state.level}`));
         },
         userRecords() {
-            return JSON.parse(localStorage.getItem(this.user))
+            return JSON.parse(localStorage.getItem(`${this.user}-${this.$store.state.level}`))
         }
     }
 }
