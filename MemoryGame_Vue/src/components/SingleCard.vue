@@ -40,12 +40,16 @@ export default {
 
             this.$store.state.secondCard = c;
             c.flipped = !c.flipped;
-            this.checkForMatch();
+
+            if (this.isMatch()) {
+                this.disableCards();
+            } else {
+                this.recoverCards();
+            }
         },
 
-        checkForMatch() {
-            let isMatch = this.$store.state.firstCard.framework === this.$store.state.secondCard.framework;
-            isMatch ? this.disableCards() : this.recoverCards();
+        isMatch() {
+             return this.$store.state.firstCard.framework === this.$store.state.secondCard.framework;
         },
 
         disableCards() {
@@ -91,5 +95,6 @@ export default {
 </script>
 
 <style scoped>
+
 
 </style>
